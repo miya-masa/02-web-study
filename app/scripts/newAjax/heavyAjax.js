@@ -3,11 +3,8 @@
   var app = window.app || {};
   app.newAjax = app.newAjax || {};
   app.newAjax.heavyAjax = function() {
-    var d = new $.Deferred();
-    setTimeout(function() {
-      d.resolve();
-    }, 5);
-    return d.promise();
+    // 5ms後に実行する
+    /* Question */
   };
   window.app = app;
 })(window, jQuery);

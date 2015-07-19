@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-describe('非同期制御', function() {
+xdescribe('非同期制御', function() {
   'use strict';
   var Counter = function() {
     this.count = 0;
@@ -47,28 +47,22 @@ describe('非同期制御', function() {
     var random = new Counter();
     var heavy = new Counter();
     var newAjax = app.newAjax;
-    var d = new $.Deferred();
-    var p = d.promise();
+    // Question 下記に示す順番で実行順序を制御する
+    // 0 heavy
+    // 0 random
+    // 0 light
+    // 1 heavy
+    // 1 random
+    // 1 light
+    // 2 heavy
+    // 2 random
+    // 2 light
+    // 3 heavy
+    // 3 random
+    // 3 light
+    // ...
     for (var i = 0; i < 5; i++) {
-      p = p.then(newAjax.heavyAjax).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + heavy.getCount() + ':new heavy Finished!!');
-        heavy.countUp();
-        return d.resolve();
-      }).
-      then(newAjax.randomAjax).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + random.getCount() + ':new random Finished!!');
-        random.countUp();
-        return d.resolve();
-      }).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + light.getCount() + ':new light Finished!!');
-        light.countUp();
-        return d.resolve();
-      }).then(newAjax.lightAjax);
     }
-    d.resolve();
     jasmine.clock().tick(100000);
   });
 });

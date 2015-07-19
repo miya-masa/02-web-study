@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-describe('Deferred Promiseを試す', function() {
+xdescribe('Deferred Promiseを試す', function() {
   'use strict';
   beforeEach(function() {
     jasmine.clock().install();

@@ -6,6 +6,11 @@ describe('人', function() {
     expect(me.name).toBe('Miya');
     expect(me.greeting).toBe('Hello');
     expect(me.helloMessage()).toBe('Hello Miya');
+
+    var me = new app.Person('Masa', 'GoodMorning');
+    expect(me.name).toBe('Masa');
+    expect(me.greeting).toBe('GoodMorning');
+    expect(me.helloMessage()).toBe('Masa GoodMorning');
   });
 
 });
