@@ -7,7 +7,7 @@
   };
   app.Superman.prototype = new app.Person();
   app.Superman.prototype.superHelloMessage = function() {
-    return this.greeting + ' ' + this.name + '!!!!!!!!!!!!!!!';
+    return this.greeting + ' Superman ' + this.name;
   };
   app.Superman.prototype.fly = function() {
     console.log('I can fly. Booooooon.');
