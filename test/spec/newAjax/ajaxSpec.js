@@ -68,7 +68,6 @@ describe('非同期制御', function() {
         return d.resolve();
       }).then(newAjax.lightAjax);
     }
-
     d.resolve();
     jasmine.clock().tick(100000);
   });
