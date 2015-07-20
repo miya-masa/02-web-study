@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-describe('スーパーマン', function() {
+xdescribe('スーパーマン', function() {
   'use strict';
   it('スーパー挨拶をする', function() {
     var me = new app.Superman('Miya', 'Hello');
