@@ -5,6 +5,8 @@
     // 親のコンストラクタを呼ぶ簡単な方法
     app.Person.call(this, name, greeting);
   };
+  // 指定したプロトタイプを持つオブジェクトの生成
+  // つまりSuperman.prototypeはPerson.prototypeを参照するオブジェクト
   app.Superman.prototype = Object.create(app.Person.prototype, {
     constructor: {
       value: app.Superman,

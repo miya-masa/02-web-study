@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-describe('非同期制御', function() {
+xdescribe('非同期制御', function() {
   'use strict';
   var Counter = function() {
     this.count = 0;
