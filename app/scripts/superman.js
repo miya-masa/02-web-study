@@ -5,7 +5,14 @@
     // 親のコンストラクタを呼ぶ簡単な方法
     app.Person.call(this, name, greeting);
   };
-  app.Superman.prototype = new app.Person();
+  app.Superman.prototype = Object.create(app.Person.prototype, {
+    constructor: {
+      value: app.Superman,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
   app.Superman.prototype.superHelloMessage = function() {
     return this.greeting + ' Superman ' + this.name;
   };
