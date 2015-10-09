@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-xdescribe('非同期制御', function() {
+describe('非同期制御', function() {
   'use strict';
   var Counter = function() {
     this.count = 0;
@@ -47,26 +47,39 @@ xdescribe('非同期制御', function() {
     var random = new Counter();
     var heavy = new Counter();
     var newAjax = app.newAjax;
+
+    // 重いajax終了処理
+    var thenHeavyFinished = function() {
+      console.log('no' + heavy.getCount() + ':new heavy Finished!!');
+      heavy.countUp();
+    };
+
+    // 軽いajax終了処理
+    var thenLightFinished = function() {
+      console.log('no' + light.getCount() + ':new light Finished!!');
+      light.countUp();
+    };
+
+    //ランダムajaxの終了処理
+    var randomFinished = function() {
+      console.log('no' + random.getCount() + ':new random Finished!!');
+      random.countUp();
+    };
     var d = new $.Deferred();
     var p = d.promise();
     for (var i = 0; i < 5; i++) {
-      p = p.then(newAjax.heavyAjax).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + heavy.getCount() + ':new heavy Finished!!');
-        heavy.countUp();
-        return d.resolve();
-      }).
-      then(newAjax.randomAjax).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + random.getCount() + ':new random Finished!!');
-        random.countUp();
-        return d.resolve();
-      }).then(function() {
-        var d = new $.Deferred();
-        console.log('no' + light.getCount() + ':new light Finished!!');
-        light.countUp();
-        return d.resolve();
-      }).then(newAjax.lightAjax);
+      // heavyAjax実行
+      p = p.then(newAjax.heavyAjax)
+        // heavyAjax終了
+        .then(thenHeavyFinished)
+        // randomAjax実行
+        .then(newAjax.randomAjax)
+        // randomAjax終了
+        .then(randomFinished)
+        // lightAjax実行
+        .then(newAjax.lightAjax)
+        // lightAjax終了
+        .then(thenLightFinished);
     }
     d.resolve();
     jasmine.clock().tick(100000);

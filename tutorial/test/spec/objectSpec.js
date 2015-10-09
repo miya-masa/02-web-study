@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-xdescribe('オブジェクトのコンストラクタ', function() {
+describe('オブジェクトのコンストラクタ', function() {
   'use strict';
   it('Objectのコンストラクタを理解する', function() {
     var obj = {};

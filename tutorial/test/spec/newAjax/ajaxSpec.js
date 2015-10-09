@@ -62,6 +62,7 @@ xdescribe('非同期制御', function() {
     // 3 light
     // ...
     for (var i = 0; i < 5; i++) {
+
     }
     jasmine.clock().tick(100000);
   });

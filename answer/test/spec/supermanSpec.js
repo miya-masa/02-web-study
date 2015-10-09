@@ -1,5 +1,5 @@
 /* global describe, it, expect, app */
-xdescribe('スーパーマン', function() {
+describe('スーパーマン', function() {
   'use strict';
   it('スーパー挨拶をする', function() {
     var me = new app.Superman('Miya', 'Hello');
@@ -9,7 +9,7 @@ xdescribe('スーパーマン', function() {
     expect(me.superHelloMessage()).toBe('Hello Superman Miya');
     expect(me instanceof app.Superman).toBe(true);
     // プロトタイプ取得の標準はObject.getPrototypeOf(obj);
-    //expect(Object.getPrototypeOf(me).__proto__).toBe(app.Person.prototype);
+    expect(Object.getPrototypeOf(me).__proto__).toBe(app.Person.prototype);
     expect(me.constructor).toBe(app.Superman);
     //オブジェクトの__proto__はコンストラクタのprototypeを参照している
     expect(me.__proto__).toBe(app.Superman.prototype);
