@@ -18,10 +18,23 @@ xdescribe('Deferred Promiseを試す', function() {
     app.delay();
     console.log('After Hello');
   });
-  it('Deferred基礎', function() {
+  it('Deferred基礎の基礎', function() {
     // app.delayが終わった後に処理を行いたい場合
     console.log('OKパターン');
     //doneの引数の関数はapp.delayの中に定義されている d.resolve()に反応して実行
+    var promise = app.delay();
+    // promiseのdone関数の引数にコールバック関数を指定すると
+    // defferedがresolve状態になった時に実行される
+    promise.done(function() {
+      var d = new $.Deferred();
+      console.log('After Hello');
+      // resolveはpromiseを返す
+      return d.resolve();
+    });
+  });
+  it('Deferred基礎', function() {
+    // app.delayが終わった後に処理を行いたい場合
+    console.log('OKパターン');
     //deferredでつなぐ場合はかならずpromiseを返すこと
     app.delay().done(function() {
       var d = new $.Deferred();
